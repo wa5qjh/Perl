@@ -1,0 +1,2 @@
+pkg upgrade -fy
+

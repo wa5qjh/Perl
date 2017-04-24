@@ -1,0 +1,13 @@
+#!/usr/local/bin/perl -w
+use Getopt::Std ;
+use Tk ;
+######
+print " Is this gonna interfere ?\n";
+######
+my $mw = MainWindow->new ;
+$mw->title("Good Day") ;
+$mw->Label( -text =>  " This window looks more organized \n" ) ->pack;
+$mw->Checkbutton( -text => " Did I do this right? " )->pack ;
+$mw->Button( -text => "EXIT" ,
+              -command => sub { exit } ) -> pack ( -side => 'right');
+MainLoop ;

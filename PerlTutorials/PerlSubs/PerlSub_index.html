@@ -1,0 +1,1061 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraph.org/schema/"><head>
+
+	<meta name="WT.qs_dlk" content="KQ3a0wrIZz0AAE9uIvUAAAAK">
+
+	<meta name="WT.qs_shmv" content="lv20100812-vanzandt.sf.quinstreet.net">
+	<meta http-equiv="Set-Cookie" content="WMUUID=KQ3a0wrIZz0AAE9uIvUAAAAK; path=/;   domain=webreference.com;">
+
+	<meta name="inject_params" content="WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK&amp;">
+
+	<meta http-equiv="Set-Cookie" content="inject_params=WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK&amp;; path=/;   domain=webreference.com;">
+
+        <!-- BEGIN META TAGS -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="revisit-after" content="1 day">
+        <meta name="robots" content="index, follow">
+<!--        <meta name="copyright" content="--><!--" />-->
+        <meta name="msvalidate.01" content="912815055E507DB91981FE8B2E555FED">
+
+        <!-- AUTOCOMPLETE CACHE -->
+        <script async="" src="PerlSub_index_files/a"></script><script gapi_processed="true" src="PerlSub_index_files/plusone.js" async="" type="text/javascript"></script><script type="text/javascript">window.userAutoCompleteArray = new Array();</script>
+
+        <!-- INCLUDE JAVASCRIPT -->
+        <!--<script src="http://code.jquery.com/jquery-1.6.1.min.js" type="text/javascript"></script>-->
+        <script src="PerlSub_index_files/jquery.js" type="text/javascript"></script>
+
+        <!-- DEFERRED JAVASCRIPT LOADING -->
+        <!-- based on googles page speed recommendations http://code.google.com/speed/page-speed/docs/payload.html#DeferLoadingJS -->
+        <script type="text/javascript">
+            var misc_defer_js = [];
+
+            // Add a script element as a child of the body
+            function site_downloadJSAtOnload(js_src) {
+                var element = document.createElement("script");
+                element.src = js_src;
+                document.body.appendChild(element);
+            }
+
+            function site_loadJSFiles() {
+                //loop through misc js files and lazy load them... usually external files that internal files rely on
+                for(src in misc_defer_js)
+                {
+                    site_downloadJSAtOnload(misc_defer_js[src]);
+                }
+                //can remove this if not needed for whole site and load through misc_defer_js
+                site_downloadJSAtOnload("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js");
+                site_downloadJSAtOnload("/min/?f=/scripts/buttons.js&g=js");
+            }
+
+            // Check for browser support of event handling capability
+            if (window.addEventListener) {
+                window.addEventListener("load", function(){
+                    site_loadJSFiles();
+                }, false);
+            }
+            else if (window.attachEvent) {
+                window.attachEvent("onload", function(){
+                    site_loadJSFiles();
+                });
+            }
+            else {
+                window.onload = function(){
+                    site_loadJSFiles();
+                }
+            }
+        </script>
+
+        <title>Perl Subroutine Primer | WebReference</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="perl, subroutine, prototype, variable, mod_perl">
+<meta name="description" content="A brief introduction to the use of subroutines in Perl.">
+<link type="text/css" rel="stylesheet" media="screen" href="PerlSub_index_files/a.css">
+<script type="text/javascript" src="PerlSub_index_files/a.js"></script>
+
+        <script type="text/javascript" language="javascript" src="PerlSub_index_files/cmp0.js"></script>
+<script type="text/javascript" language="javascript" src="PerlSub_index_files/fx.js"></script>
+<script type="text/javascript" language="JavaScript" src="PerlSub_index_files/fc.js"></script><script language="JavaScript" src="PerlSub_index_files/g.js"></script>
+        <link rel="shortcut icon" href="http://www.webreference.com/favicon.ico" type="image/x-icon">
+    <script src="PerlSub_index_files/nonSecureAnonymousFramework"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size: 24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size: 14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yO/r/_j03izEX40U.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size: 12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size: 12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size: 16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}
+.fb_iframe_widget iframe{position:relative;vertical-align:text-bottom}
+.fb_iframe_widget span{position:relative}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_button_simple,
+.fb_button_simple_rtl{background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yH/r/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}
+.fb_button_simple_rtl{background-position:right 0}
+.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}
+.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}
+a.fb_button_simple:hover .fb_button_text,
+a.fb_button_simple_rtl:hover .fb_button_text,
+.fb_button_simple:hover .fb_button_text,
+.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}
+.fb_button,
+.fb_button_rtl{background:#29447e url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}
+.fb_button .fb_button_text,
+.fb_button_rtl .fb_button_text{background:#5f78ab url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}
+a.fb_button,
+a.fb_button_rtl,
+.fb_button,
+.fb_button_rtl{text-decoration:none}
+a.fb_button:active .fb_button_text,
+a.fb_button_rtl:active .fb_button_text,
+.fb_button:active .fb_button_text,
+.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}
+.fb_button_xlarge,
+.fb_button_xlarge_rtl{background-position:left -60px;font-size: 24px;line-height:30px}
+.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}
+a.fb_button_xlarge:active{background-position:left -99px}
+.fb_button_xlarge_rtl{background-position:right -268px}
+.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}
+a.fb_button_xlarge_rtl:active{background-position:right -307px}
+.fb_button_large,
+.fb_button_large_rtl{background-position:left -138px;font-size: 13px;line-height:16px}
+.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}
+a.fb_button_large:active{background-position:left -163px}
+.fb_button_large_rtl{background-position:right -346px}
+.fb_button_large_rtl .fb_button_text{margin-right:25px}
+a.fb_button_large_rtl:active{background-position:right -371px}
+.fb_button_medium,
+.fb_button_medium_rtl{background-position:left -188px;font-size: 11px;line-height:14px}
+a.fb_button_medium:active{background-position:left -210px}
+.fb_button_medium_rtl{background-position:right -396px}
+.fb_button_text_rtl,
+.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}
+a.fb_button_medium_rtl:active{background-position:right -418px}
+.fb_button_small,
+.fb_button_small_rtl{background-position:left -232px;font-size: 10px;line-height:10px}
+.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}
+a.fb_button_small:active,
+.fb_button_small:active{background-position:left -250px}
+.fb_button_small_rtl{background-position:right -440px}
+.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}
+a.fb_button_small_rtl:active{background-position:right -458px}
+.fb_share_count_wrapper{position:relative;float:left}
+.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.fb_share_count_inner{background:#e8ebf2;display:block}
+.fb_share_count_right{margin-left:-1px;display:inline-block}
+.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size: 10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}
+.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size: 22px;border:solid 1px #b0b9ec}
+.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yU/r/bSOHtKbCGYI.png)}
+.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yX/r/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}
+.fb_share_no_count{display:none}
+.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size: 10px}
+.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size: 11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}
+.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size: 13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}
+.fb_share_count_hidden .fb_share_count_nub_top,
+.fb_share_count_hidden .fb_share_count_top,
+.fb_share_count_hidden .fb_share_count_nub_right,
+.fb_share_count_hidden .fb_share_count_right{visibility:hidden}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size: 13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size: 11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr{left:-4px}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_rtl{left:2px}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{left:0;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}
+</style><style type="text/css">* html #li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link{height:1% !important;}#li_ui_li_gen_1324083415672_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link{border:0 !important;height:undefinedpx !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link:link, #li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link:visited, #li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link:hover, #li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1324083415672_0 a#li_ui_li_gen_1324083415672_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1324083415672_0 #li_ui_li_gen_1324083415672_0-logo{background:url(http://static01.linkedin.com/scds/common/u/img/sprite/sprite_connect_v12.png) 0px -276px no-repeat !important;cursor:pointer !important;border:0 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;z-index:1 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;}#li_ui_li_gen_1324083415672_0.hovered #li_ui_li_gen_1324083415672_0-logo{background-position:-20px -276px !important;}#li_ui_li_gen_1324083415672_0.clicked #li_ui_li_gen_1324083415672_0-logo, #li_ui_li_gen_1324083415672_0.down #li_ui_li_gen_1324083415672_0-logo{background-position:-40px -276px !important;}#li_ui_li_gen_1324083415672_0 #li_ui_li_gen_1324083415672_0-title{font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;color:#333 !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;border-left:0 !important;text-shadow:#FFFFFF -1px 1px 0 !important;line-height:20px !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}#li_ui_li_gen_1324083415672_0.hovered #li_ui_li_gen_1324083415672_0-title{color:#000 !important;border:1px solid #000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;border-left:0 !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}#li_ui_li_gen_1324083415672_0.clicked #li_ui_li_gen_1324083415672_0-title, #li_ui_li_gen_1324083415672_0.down #li_ui_li_gen_1324083415672_0-title{color:#666 !important;border:1px solid #000 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;border-left:0 !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}#li_ui_li_gen_1324083415672_0 #li_ui_li_gen_1324083415672_0-title-text{display:inline-block !important;vertical-align:top !important;height:18px !important;line-height:20px !important;}#li_ui_li_gen_1324083415672_0 #li_ui_li_gen_1324083415672_0-title #li_ui_li_gen_1324083415672_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}</style></head>
+    <!--[if IE 9]><body class="ie9 ie"><![endif]-->
+    <!--[if IE 8]><body class="ie8 ie"><![endif]-->
+    <!--[if IE 7]><body class="ie7 ie"><![endif]-->
+    <!--[if lte IE 6]><body class="ie6 ie"><![endif]-->
+    <!--[if !IE]><body><![endif]-->
+
+
+        <body data-rendering="true"><div id="itxtexclude"><script type="text/javascript" src="PerlSub_index_files/init.js"></script><link rel="stylesheet" type="text/css" href="PerlSub_index_files/itxtcss_1307009512.css" id="itxtcss"><script type="text/javascript" src="PerlSub_index_files/ui_1323791669.js"></script><script type="text/javascript" src="PerlSub_index_files/tmpl_1323791669.js"></script><script type="text/javascript" src="PerlSub_index_files/metrics_1308735381.js"></script><script type="text/javascript" src="PerlSub_index_files/itxt_1317632163.js"></script><script type="text/javascript" src="PerlSub_index_files/fx_1308735381.js"></script><script type="text/javascript" src="PerlSub_index_files/debug_1308735381.js"></script><script type="text/javascript" src="PerlSub_index_files/data_1323791619.js"></script><script type="text/javascript" src="PerlSub_index_files/core_1323791669.js"></script></div><iframe src="PerlSub_index_files/hub.html" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrame" tabindex="0" allowtransparency="true" id="twttrHubFrame" frameborder="0" scrolling="no"></iframe><div id="header">
+        <div id="navigation_bar">
+    <ul class="navigation_list">
+        <li><a href="http://www.webreference.com/">Home</a></li>
+        <li class="directory"><a href="#">Languages</a>
+            <ul>
+                <li class="first"><a href="http://www.webreference.com/programming/asp">ASP</a></li>
+                <li><a href="http://www.webreference.com/authoring/style/sheets">CSS</a></li>
+                <li><a href="http://www.webreference.com/dhtml">DHTML</a></li>
+                <li><a href="http://www.webreference.com/html">HTML</a></li>
+                <li><a href="http://www.webreference.com/programming/javascript">JavaScript</a></li>
+                <li><a href="http://www.webreference.com/perl">Perl</a></li>
+                <li><a href="http://www.webreference.com/programming/php">PHP</a></li>
+                <li><a href="http://www.webreference.com/authoring/languages/xml/rss">RSS</a></li>
+                <li><a href="http://www.webreference.com/authoring/languages/xhtml">XHTML</a></li>
+                <li><a href="http://www.webreference.com/authoring/languages/xml">XML</a></li>
+            </ul>
+        </li>
+        <li class="directory"><a href="#">General</a>
+            <ul>
+                <li class="first"><a href="http://www.webreference.com/3d">3D Modeling</a></li>
+                <li><a href="http://www.webreference.com/authoring/design">Design</a></li>
+                <li><a href="http://www.webreference.com/dlab">Design Lab</a></li>
+                <li><a href="http://www.webreference.com/graphics">Graphics</a></li>
+                <li><a href="http://www.webreference.com/html">HTML Tools</a></li>
+                <li><a href="http://www.webreference.com/internet">Internet</a></li>
+                <li><a href="http://www.webreference.com/tools/javascript">JavaScript Tools</a></li>
+                <li><a href="http://www.webreference.com/multimedia">Multimedia</a></li>
+                <li><a href="http://www.webreference.com/programming">Programming</a></li>
+                <li><a href="http://www.webreference.com/promotion">Promotion</a></li>
+                <li><a href="http://www.webreference.com/reviews">Reviews</a></li>
+                <li><a href="http://www.webreference.com/promotion/search">Search Engine Resources</a></li>
+                <li><a href="http://www.webreference.com/video">Video</a></li>
+                <li><a href="http://www.webreference.com/web-servers">Web Servers</a></li>
+            </ul>
+        </li>
+        <li class="directory"><a href="#">Reference</a>
+            <ul>
+                <li class="first"><a href="http://www.webreference.com/html/reference/color">Color Codes</a></li>
+                <li><a href="http://www.webreference.com/html/reference/character">HTML Characters</a></li>
+                <li><a href="http://www.webreference.com/html/reference/specs">HTML Tags</a></li>
+                <li><a href="http://www.webreference.com/javascript/reference/core_ref/contents.html">JavaScript Core</a></li>
+                <li><a href="http://www.webreference.com/services/reference">Reference Section</a></li>
+                <li><a href="http://www.webreference.com/services">Site Services</a></li>
+                <li><a href="http://www.webreference.com/xml/reference">XML</a></li>
+            </ul>
+        </li>
+        <li class="highlighted">
+                <a href="javascript:void(0);" onclick="document.getElementById('nl-signup').style.display ='inline';">Newsletter</a>
+        </li>
+    </ul>
+    <div id="search_box">
+        <form action="/search.php" method="get">
+            <div id="search" class="left">
+                <input id="search-input" name="q" value="Search Site" onfocus="if(this.value == 'Search Site') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search Site';}" type="text">
+            </div>
+            <button id="search-submit" class="textButton" type="submit" title="Go">Go</button>
+        </form>
+    </div>
+</div>
+<div id="header_content">
+    <div id="top_bar">
+        <div class="right">
+            <div id="idc_logo" class="left">
+                <a href="http://www.developer.com/"><img src="PerlSub_index_files/dev.png" alt="Developer.com"></a>
+            </div>
+            <div id="login_register" class="left">
+                <a href="http://www.webreference.com/accountManagement?formType=loginForm">Login</a> |
+                <a href="http://www.webreference.com/accountManagement?formType=registrationForm">Register</a>
+            </div>
+            <div id="social_buttons" class="left">
+                <a href="http://www.twitter.com/WebReference"><img src="PerlSub_index_files/icon-twitter.gif" alt="Internet.com"></a>
+                <a href="http://www.facebook.com/pages/WebReferencecom/34005022581"><img src="PerlSub_index_files/icon-fb.gif" alt="Internet.com"></a>
+                <a href="http://www.webreference.com/rss.xml"><img src="PerlSub_index_files/icon-rss-feed.gif" alt="Internet.com"></a>
+            </div>
+        </div>
+    </div>
+    <div id="top_content"><div id="logo">
+        <a href="http://www.webreference.com/">
+            <img src="PerlSub_index_files/logo.png" alt="WebReference.com">
+        </a>
+    </div>
+    <div id="quad_top" class="quad">
+        <!--
+AD position = H
+OAS eqv. = 468x60-1
+QUAD pos = Leo-FLEX(LEO)POS(TOP)
+QUAD path = www.webreference.com
+Page type = index
+-->
+<script type="text/javascript" language="JavaScript">
+zzfocrender("203", "9530", "657018/657013/657012/581231/581034", "14", "728", "90", "", "", "");</script><script language="JavaScript" src="PerlSub_index_files/i0_005.js"></script>
+<noscript>
+<a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;n=203;c=657018/657013/657012/581231/581034;s=9530;x=3584;f=3704734993;u=j;z=20111216011924" target="_blank">
+<img border="0" width="728" height="90" src="http://o1.qnsr.com/cgi/x?;n=203;c=657018/657013/657012/581231/581034;s=9530;x=3584;f=3704734993;u=j;z=20111216011924" alt="Click here" /></a>
+</noscript>
+    </div>
+    </div>
+
+</div>
+<!--div id="nl-signup" class="nl-signup" onMouseOver="signup_hovered=1;"-->
+<div id="nl-signup" class="nl-signup">
+    <div class="top">&nbsp;</div>
+    <div class="middle">
+        <div id="nl-signup-error"></div>
+        <form method="post" id="newsletterform" action="">
+            <input id="namecard" name="namecard" placeholder="Enter your Email Address" required="" type="text">
+            <!--input id="namecard" onclick="signup_clicked=1;" name="namecard" type=text placeholder="Enter your Email Address" required/-->
+            <input src="PerlSub_index_files/btn-subscribe.gif" value="" name="btnSearch" id="newsletter_signInButton" type="image">
+        </form>
+        <div class="btn">
+            <p>
+                <a href="javascript:void(0)" onclick="document.getElementById('nl-signup').style.display = 'none';">Close</a>
+            </p>
+        </div>
+    </div>
+    <div class="bottom">&nbsp;</div>
+</div>
+         </div>
+            <div id="body" class="col2_right">
+                            <div id="main_content">
+                <div id="breadcrumb">
+    <a href="http://www.webreference.com/">Home</a>
+        / <a href="http://www.webreference.com/programming/index.html">Programming</a>
+        / <a href="http://www.webreference.com/programming/perl/index.html">perl</a>
+        / <a href="http://www.webreference.com/programming/perl/subroutines/index.html">subroutines</a>
+        / Perl Subroutine Primer</div><div class="gray_box">
+    <!--
+AD position = B
+OAS eqv. = ciu
+QUAD pos = ciu-FLEX(CIU)
+QUAD path = www.webreference.com
+Page type = index
+-->
+<script type="text/javascript" language="JavaScript">
+zzfocrender("203", "9530", "657020/657013/657012/581231/581034", "59", "600", "200", "", "", "");</script><script language="JavaScript" src="PerlSub_index_files/i0_003.js"></script><script language="JavaScript" src="PerlSub_index_files/i_004.js"></script><div style="background-color:#E1E1E1"><a href="http://o1.qnsr.com//cgi/c?a=20121761;x=15105;c=203657020,203657020;i=0;n=203;s=9530;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;y=http://www.webreference.com/programming/perl/subroutines/index.html;;e=i;s=9530;g=134;w=0;m=0;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;z=613321030;;k=http://www.devx.com/ebook/Article/37782"> Best Practices for Developing a Web Site: Checklists, Tips, Strategies &amp; More. Download Exclusive eBook Now. </a></div>
+<noscript>
+<a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;n=203;c=657020/657013/657012/581231/581034;s=9530;x=15104;f=913589627;u=j;z=20111216011924" target="_blank">
+<img border="0" width="600" height="200" src="http://o1.qnsr.com/cgi/x?;n=203;c=657020/657013/657012/581231/581034;s=9530;x=15104;f=913589627;u=j;z=20111216011924" alt="Click here" /></a>
+</noscript>
+</div>
+<div class="article_header">
+    <h1>Perl Subroutine Primer</h1>
+        <p class="author">By Dan Ragle</p>
+
+        <div id="social_media">
+    <div id="twitter">
+        <iframe title="Twitter Tweet Button" style="width: 55px; height: 20px;" class="twitter-share-button twitter-count-none" src="PerlSub_index_files/tweet_button.html" allowtransparency="true" frameborder="0" scrolling="no"></iframe><script type="text/javascript" src="PerlSub_index_files/widgets.js"></script>
+    </div>
+    <div id="google_plus"><!-- Place this tag where you want the +1 button to render -->
+        <!-- Place this tag where you want the +1 button to render -->
+        <div style="height: 20px; width: 32px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe allowtransparency="true" hspace="0" id="I1_1324083267072" marginheight="0" marginwidth="0" name="I1_1324083267072" src="PerlSub_index_files/fastbutton.html" style="position: static; left: 0pt; top: 0pt; width: 32px; margin: 0px; border-style: none; height: 20px; visibility: visible;" tabindex="-1" vspace="0" title="+1" frameborder="0" scrolling="no" width="100%"></iframe></div>
+
+        <!-- Place this render call where appropriate -->
+        <script type="text/javascript">
+            (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+    </div>
+    <div id="linkedin_inshare">
+        <script src="PerlSub_index_files/in.js" type="text/javascript"></script>
+        <span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0pt ! important; margin: 0pt ! important; text-indent: 0pt ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1324083415672_0"><a id="li_ui_li_gen_1324083415672_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1324083415672_0-logo">in</span><span id="li_ui_li_gen_1324083415672_0-title"><span id="li_ui_li_gen_1324083415672_0-mark"></span><span id="li_ui_li_gen_1324083415672_0-title-text">Share</span></span></a></span></span></span><script type="IN/Share+init"></script>
+    </div>
+    <div id="facebook_like">
+        <iframe src="PerlSub_index_files/like.html" style="border: medium none; overflow: hidden; width: 90px; height: 21px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+    </div>
+</div>    <div class="clear"></div>
+</div>
+<div id="article_body">
+    <script type="text/javascript" src="PerlSub_index_files/basicJS.js"></script><script type="text/javascript" src="PerlSub_index_files/buttons.js"></script><script type="text/javascript">
+<!--
+	NS4 = (document.layers); IE4 = (document.all); ver4 = (NS4 || IE4);
+  curPage = 0; numPages = 2;
+//-->
+</script><div id="content">
+<div style="float: right; margin-top: -10px;">
+<script type="text/javascript"><!--
+  insertButtons();
+//--></script><p align="right"><img alt="#" src="PerlSub_index_files/button_center.gif" border="0" height="18" width="18"><a href="http://www.webreference.com/programming/perl/subroutines/2.html"><img alt="&gt;" src="PerlSub_index_files/button_right.gif" border="0" height="18" width="18"></a><br><a href="http://www.webreference.com/programming/perl/subroutines/2.html">[next]</a>
+</p></div>
+
+
+  
+<div style="float: right; padding-left: 10px; padding-bottom: 10px;">
+<br></div>
+<p>If you've not been scripting for long (and  even if you've
+been scripting for  a long time) you may think that one of the
+simplest ways to repeat sections of code in your Perl scripts is to
+copy and paste the code and then rename the variables that the code
+is applied to. For example, if we have three variables, named
+<code>$charlie</code>, <code>$snoopy</code>, and <code>$woodstock</code>,
+and we need to apply a regex substitution to each of them, we might
+be tempted to write:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>#&nbsp;trim&nbsp;leading/trailing&nbsp;whitespace&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2"><span class="vars">$charlie</span><span>&nbsp;&nbsp;&nbsp;=~&nbsp;s/^\s*(.*?)\s*$/</span><span class="vars">$1</span><span>/;&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1"><span class="vars">$snoopy</span><span>&nbsp;&nbsp;&nbsp;&nbsp;=~&nbsp;s/^\s*(.*?)\s*$/</span><span class="vars">$1</span><span>/;&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2"><span class="vars">$woodstock</span><span>&nbsp;=~&nbsp;s/^\s*(.*?)\s*$/</span><span class="vars">$1</span><span>/;&nbsp;</span></td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10"># trim leading/trailing whitespace
+$charlie   =~ s/^\s*(.*?)\s*$/$1/;
+$snoopy    =~ s/^\s*(.*?)\s*$/$1/;
+$woodstock =~ s/^\s*(.*?)\s*$/$1/;
+</textarea></div>
+</span>
+<p>This is relatively simple to do,  but invariably, such an approach 
+will become more and more cumbersome the longer your script becomes 
+(and, to the programmers that follow you, as long as it lives). For 
+example, what happens later in the code when you realize you have 
+several more variables all of which must have the exact same 
+substitution applied? Do you search for the original code, then copy and
+ paste it again and again? Doing so not only wastes your time, but also 
+introduces greater possibilities for error, since each time you copy the
+ code (and edit it for your new variable names), you could copy 
+something incorrectly or accidentally edit the code in a way contrary to
+ your intention. More importantly, consider the ongoing maintenance 
+requirements for the code. Should your initial substitution prove to be 
+faulty, incomplete, or simply need extension, a maintenance programmer 
+(perhaps even you) will need to find and re-edit each instance of the 
+code to correct the problem.</p>
+<p>You may have already guessed (if the title didn't already give it
+away) that we're going to examine the use of user-defined
+<em>subroutines</em> in Perl; blocks of code that can accept, operate
+on, and/or return variables and values that  can be reused
+throughout your Perl script without needing to copy and
+paste it each time it's required. When you define and use subroutines,
+the  code logic is neatly contained in a single
+location of the script and can be called (and later modified, when
+necessary) without requiring you to track down every instance of the
+logic in the script at large. Our small copy and paste sample from
+above, for example, could be altered to look like this:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>&amp;trim_space(</span><span class="vars">$charlie</span><span>,</span><span class="vars">$snoopy</span><span>,</span><span class="vars">$woodstock</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">sub&nbsp;trim_space&nbsp;{&nbsp;</td></tr><tr><td class="gutter">3</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="keyword">foreach</span><span>&nbsp;(@_)&nbsp;{s/^\s*(.*?)\s*$/</span><span class="vars">$1</span><span>/}&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">&amp;trim_space($charlie,$snoopy,$woodstock);
+sub trim_space {
+   foreach (@_) {s/^\s*(.*?)\s*$/$1/}
+}
+</textarea></div>
+</span>
+<p>Admittedly, we've not saved ourselves any space in this small
+example, but later when we need to trim the white space from additional
+strings (and even later, when we need to modify or amend our
+<code>trim_space</code> functionality in a future version of the script)
+we'll be thankful that we've already created and defined a subroutine
+to do it; code that we can just call directly instead of copying and
+pasting it repetitively.</p>
+<p>Subroutines in Perl are easy to define and use; but like
+practically any other aspect of any programming language, there are some
+rules that you need to know --and follow-- to make the most of them (and
+avoid shooting yourself in the foot). The remainder of this tutorial
+focuses on the basic uses of subroutines in the Perl language; including
+how to define them,  call them, pass variable parameters
+into them, and  to return unique values from them.</p>
+<h2>Basic Subroutine Definitions in Perl</h2>
+<p>Perl subroutines can be defined as either <em>named</em> or <em>anonymous</em>
+subroutines.</p>
+<p>A named subroutine can be declared and defined anywhere in a Perl
+script, using the syntax:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="line1"><span>sub&nbsp;NAME&nbsp;BLOCK&nbsp;</span></td></tr></tbody></table></div><textarea style="display: none;" name="code" class="php:nogutter:nocontrols" cols="60" rows="10">sub NAME BLOCK
+</textarea></div>
+</span>
+<p>Where <code><strong>NAME</strong></code> is the name you select for your
+subroutine, and <em>BLOCK</em> is the actual programming logic, surrounded
+by curly braces (<code>{...}</code>). When selecting names for your general
+subroutines, it's recommended that you use all lower case names; since, by
+convention, subroutine names with all capital letters indicate actions that
+are triggered automatically as needed by Perl; such as <code>AUTOLOAD</code>
+or <code>DESTROY</code>, and mixed case names are often utilized as package
+names. If you haven't already, you'll learn about these technologies later
+as you continue your Perl education. But for now, keep your user-defined
+subroutine names to all lower case and you'll avoid this ambiguity in the
+future.</p>
+<p>Here's an example of a basic subroutine definition, as well as the
+code we might use to execute (call) it:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>say_hello();&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">sub&nbsp;say_hello&nbsp;{&nbsp;</td></tr><tr><td class="gutter">3</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;World!\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">say_hello();
+sub say_hello {
+   print "Hello, World!\n";
+}
+</textarea></div>
+</span>
+<p>In general, subroutines can be called from anywhere within your Perl
+script (we'll talk more about this actual process later in this article),
+whether the subroutine has been defined or not. Because of this,
+programmers often collect all of a script's subroutines in the same place,
+such as the bottom of the script after the main execution logic. This is
+the approach we used in the above example script.</p>
+<p>When calling subroutines in some specific situations, however, it's
+necessary that the subroutine be <em>declared</em> before it can actually
+be called. In these cases, you can choose to either declare and define
+the subroutine before the code that calls it; or you can just declare the
+subroutine (without initially providing a code block) with the intent to
+"fill in the code details" at some other point in the application. For
+example:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span></span><span class="keyword">use</span><span>&nbsp;strict;&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">sub&nbsp;hello_string;&nbsp;</td></tr><tr><td class="gutter">3</td><td class="line1"><span class="keyword">print</span><span>&nbsp;hello_string;&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">#&nbsp;some&nbsp;other&nbsp;code&nbsp;here....&nbsp;</td></tr><tr><td class="gutter">5</td><td class="line1">sub&nbsp;hello_string&nbsp;{&nbsp;</td></tr><tr><td class="gutter">6</td><td class="line2">&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;World!\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">7</td><td class="line1">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">use strict;
+sub hello_string;
+print hello_string;
+# some other code here....
+sub hello_string {
+   return "Hello, World!\n";
+}
+</textarea></div>
+</span>
+<p>When we access the <code>hello_string</code> subroutine in the above
+example without using parentheses (and without the older style <code>&amp;</code>
+notation), we are calling the subroutine as a <code>list operator</code>,
+which may change the precedence of the subroutine call in relation to
+other operators that exist within the same command. In order to use a
+subroutine as a list operator as in the above example, the subroutine
+must have already been declared, which is what we accomplished with the
+<code>sub hello_string</code> code above. This statement is called a
+<code>forward declaration</code>; and is rarely needed (for standard
+user defined subroutines that are called using parentheses, and, as we'll
+discuss later, forward declarations are unnecessary) unless you want to
+create and call your user-defined subroutines in the same manner as
+the built-in Perl list operators, such as <code>print</code> or
+<code>shift</code>. Still, it's there when you need it.</p>
+<p>A subroutine can also be defined as an <em>anonymous</em> subroutine,
+which is assigned as a reference to a variable and then called by dereferencing
+the variable assigned to:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>my&nbsp;</span><span class="vars">$hello_sub</span><span>&nbsp;=&nbsp;sub&nbsp;{</span><span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;World!\n"</span><span>};&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2"><span class="vars">$hello_sub</span><span>-&gt;();&nbsp;</span></td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">my $hello_sub = sub {print "Hello, World!\n"};
+$hello_sub-&gt;();
+</textarea></div>
+</span>
+<p>If the idea of defining anonymous subroutines using references in
+this way confuses you, you may want to take a look at our previous
+tutorial which focused on the use of references to create
+<a href="http://www.webreference.com/programming/perl/nested/">Nested Data Structures in Perl</a>.</p>
+<p>Subroutines can also be defined with <em>prototypes</em>, which allow
+them to enforce the types and number of parameters that are passed to them.
+We'll revisit this process later in this tutorial; but for now, let's look
+at how subroutines are called in Perl.</p>
+<h2>Calling Subroutines</h2>
+<p>To call a named subroutine, you can use one of several possible formats.
+The most common formats are demonstrated below:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>sub&nbsp;say_hello_to&nbsp;{&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">&nbsp;&nbsp;&nbsp;my&nbsp;<span class="vars">$name</span><span>=shift;&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;$name!\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">}&nbsp;</td></tr><tr><td class="gutter">5</td><td class="line1">#&nbsp;various&nbsp;ways&nbsp;to&nbsp;call&nbsp;the&nbsp;above&nbsp;subroutine&nbsp;</td></tr><tr><td class="gutter">6</td><td class="line2">say_hello_to(<span class="string">"Dan"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">7</td><td class="line1">say_hello_to&nbsp;<span class="string">"Dan"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">8</td><td class="line2">&amp;say_hello_to(<span class="string">"Dan"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">9</td><td class="line1">&amp;say_hello_to;&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">sub say_hello_to {
+   my $name=shift;
+   print "Hello, $name!\n";
+}
+# various ways to call the above subroutine
+say_hello_to("Dan");
+say_hello_to "Dan";
+&amp;say_hello_to("Dan");
+&amp;say_hello_to;
+</textarea></div>
+</span>
+<p>Each of these formats has properties that are unique to it. Let's briefly
+examine each:</p>
+<dl><dt><code><strong>say_hello_to("Dan");</strong></code></dt>
+<dd>In this format the subroutine is called and executed using the passed in
+string literal parameter <code>Dan</code> (we'll discuss the passing of
+parameters later in this article). Since our intention to call a subroutine
+was made clear (via the inclusion of the parentheses) the actual subroutine
+(<code>say_hello_to</code>) could have been defined anywhere within the
+script (or imported in, or required, etc.). This format is probably
+the most common in modern Perl scripts.
+<p></p></dd>
+<dt><code><strong>say_hello_to "Dan";</strong></code></dt>
+<dd>Again, we call the subroutine and pass it the same parameter. In this
+case, we haven't used an ampersand or parentheses, thus our
+intent here may be ambiguous to the perl interpreter. Therefore, as we
+discussed briefly in the previous section, Perl requires that we
+have declared the subroutine (and optionally also defined its code)
+<em>before</em> we actually call it in this manner. In the above example,
+we both declared and defined the code for the
+<code>say_hello_to</code> subroutine prior to our actual call, so
+we're ok.
+<p></p></dd>
+<dt><code><strong>&amp;say_hello_to("Dan");</strong></code></dt>
+<dd>This call is most similar to the first, and is common in older Perl
+scripts; the subroutine is executed with the string literal parameter
+<code>Dan</code>. When you call a subroutine in this manner,
+note that prototype checking is disabled. We'll discuss prototypes in a
+bit more detail later.
+<p></p></dd>
+<dt><code><strong>&amp;say_hello_to;</strong></code></dt>
+<dd>Finally, we call the subroutine without passing any parameters. In
+this special case, where we use the ampersand and we omit any parameters,
+the special <code>@_</code> array is passed to the subroutine as is (i.e.,
+with whatever it currently contains).<p></p></dd>
+</dl><p>Note here an important distinction between <em>calling</em> a named
+subroutine, and <em>referring to the name</em> of a named subroutine. When
+we call a subroutine --i.e., actually execute the code of the subroutine-- we
+(typically) use one of the formats described above. When we refer to the
+subroutine's name, however --without executing its code-- we always include
+the leading ampersand (<code>&amp;</code>), just as we would always refer to
+a named array with its leading <code>@</code>, or a named hash with its
+leading <code>%</code> sign. For example, in the following assignment:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>sub&nbsp;my_sub&nbsp;{&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;World!\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">}&nbsp;</td></tr><tr><td class="gutter">4</td><td class="line2">my&nbsp;<span class="vars">$ref_to_sub</span><span>&nbsp;=&nbsp;\my_sub;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;calls&nbsp;my_sub&nbsp;</span><span class="keyword">and</span><span>&nbsp;assigns&nbsp;a&nbsp;</span></td></tr><tr><td class="gutter">5</td><td class="line1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;reference&nbsp;to&nbsp;the&nbsp;returned&nbsp;value;&nbsp;</td></tr><tr><td class="gutter">6</td><td class="line2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;i.e.,&nbsp;<span class="string">"Hello,&nbsp;World!"</span><span>&nbsp;is&nbsp;printed&nbsp;</span></td></tr><tr><td class="gutter">7</td><td class="line1"><span class="keyword">print</span><span>&nbsp;$</span><span class="vars">$ref_to_sub</span><span>.</span><span class="string">"\n"</span><span>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;1&nbsp;</span></td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">sub my_sub {
+   print "Hello, World!\n";
+}
+my $ref_to_sub = \my_sub;     # calls my_sub and assigns a
+                              # reference to the returned value;
+                              # i.e., "Hello, World!" is printed
+print $$ref_to_sub."\n";      # 1
+</textarea></div>
+</span>
+<p>we see that the assignment to <code>$ref_to_sub</code> is not the actual
+subroutine, but instead is the return value from the subroutine. In this
+context we must use the ampersand, since it's the name of the subroutine
+we want and not the call:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>sub&nbsp;my_sub&nbsp;{&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;World!\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">}&nbsp;</td></tr><tr><td class="gutter">4</td><td class="line2">my&nbsp;<span class="vars">$ref_to_sub</span><span>&nbsp;=&nbsp;\&amp;my_sub;&nbsp;</span></td></tr><tr><td class="gutter">5</td><td class="line1"><span class="vars">$ref_to_sub</span><span>-&gt;();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Hello,&nbsp;World!&nbsp;</span></td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">sub my_sub {
+   print "Hello, World!\n";
+}
+my $ref_to_sub = \&amp;my_sub;
+$ref_to_sub-&gt;();            # Hello, World!
+</textarea></div>
+</span>
+<p>In the first example, had <code>my_sub</code> not been declared before
+the assignment (<code>my $ref_to_sub = \my_sub;</code>) and <code>use strict</code>
+was in force, then the compiler would've complained about the bareword
+<code>my_sub</code>.</p>
+<h2>Passing Parameters</h2>
+<p>While some subroutines may be helpful as static code blocks (that simply
+repeat the exact same action as needed without any variation) most
+subroutines become more useful by  passing parameters--sending
+variable values to the subroutine that it should act on, and possibly
+receiving unique values back from the subroutine in response.</p>
+<p>In Perl, the passing of parameters to and from subroutines is very
+straightforward. Parameter values are always passed to and returned from
+subroutines as a list of scalar values; and those values can be referenced
+within the subroutine via the special <code>@_</code> array; which Perl
+automatically sets up on each entry to the subroutine to contain the values
+that have been passed to it. Consider, for example, this expansion of our
+<code>say_hello_to</code> subroutine above:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>#&nbsp;call&nbsp;say_hello_to&nbsp;with&nbsp;3&nbsp;parameters&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">say_hello_to(<span class="string">"Scott"</span><span>,</span><span class="string">"Nathan"</span><span>,</span><span class="string">"Dan"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">sub&nbsp;say_hello_to&nbsp;{&nbsp;</td></tr><tr><td class="gutter">4</td><td class="line2">&nbsp;&nbsp;&nbsp;<span class="keyword">foreach</span><span>&nbsp;(@_)&nbsp;{&nbsp;</span><span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;$_!\n"</span><span>;&nbsp;}&nbsp;</span></td></tr><tr><td class="gutter">5</td><td class="line1">}&nbsp;</td></tr><tr><td class="gutter">6</td><td class="line2">#&nbsp;prints:&nbsp;</td></tr><tr><td class="gutter">7</td><td class="line1">#&nbsp;Hello,&nbsp;Scott!&nbsp;</td></tr><tr><td class="gutter">8</td><td class="line2">#&nbsp;Hello,&nbsp;Nathan!&nbsp;</td></tr><tr><td class="gutter">9</td><td class="line1">#&nbsp;Hello,&nbsp;Dan!&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10"># call say_hello_to with 3 parameters
+say_hello_to("Scott","Nathan","Dan");
+sub say_hello_to {
+   foreach (@_) { print "Hello, $_!\n"; }
+}
+# prints:
+# Hello, Scott!
+# Hello, Nathan!
+# Hello, Dan!
+</textarea></div>
+</span>
+<p>Note that we can access the <code>@_</code> array and expect it to have
+the values passed to the subroutine without having to do anything special
+on our part; Perl sets up this array automatically for us. And our earlier
+version of <code>say_hello_to</code> shows you a common way to convert a
+passed parameter to a "named" parameter, by just assigning the values to
+a private (<code>my</code>) variable, i.e.:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>my&nbsp;</span><span class="vars">$parameter_name</span><span>=</span><span class="string">"Dan"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">say_hello_to(<span class="vars">$parameter_name</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">sub&nbsp;say_hello_to&nbsp;{&nbsp;</td></tr><tr><td class="gutter">4</td><td class="line2">&nbsp;&nbsp;&nbsp;my&nbsp;<span class="vars">$name</span><span>=shift;&nbsp;</span></td></tr><tr><td class="gutter">5</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">"Hello,&nbsp;$name!\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">6</td><td class="line2">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">my $parameter_name="Dan";
+say_hello_to($parameter_name);
+sub say_hello_to {
+   my $name=shift;
+   print "Hello, $name!\n";
+}
+</textarea></div>
+</span>
+<p>Recall that <code>shift</code>, when not provided with a parameter,
+automatically defaults to operating on the <code>@_</code> array. The
+above construct is very common in Perl programming.</p>
+<p>In the above example, we created a copy of the value of the parameter
+and placed it in <code>$name</code> so we could work with it. We could
+modify <code>$name</code> in the <code>say_hello_to</code> subroutine above
+without fear of changing the variable that was passed to it (in this case,
+<code>$parameter_name</code>). In computer programming parlance, this is
+called pass-by-value, i.e., only the values of the passed parameters are
+used without changing the underlying parameter in the main program chunk,
+but in some cases you <em>want</em> to adjust the underlying parameter, the
+actual parameter in the program that you are passing to the subroutine.
+Perl provides two primary ways to accomplish this.</p>
+<p>First, you can refer directly to the <code>$_</code> elements of the
+<code>@_</code> array, and changes made to those elements will be reflected
+in the actual variables that you passed to the subroutine. For example:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>my&nbsp;</span><span class="vars">$test_value</span><span>=</span><span class="string">"foo1"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">add_a_bar(<span class="vars">$test_value</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1"><span class="keyword">print</span><span>&nbsp;</span><span class="string">"$test_value\n"</span><span>;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;foobar1&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">sub&nbsp;add_a_bar&nbsp;{&nbsp;</td></tr><tr><td class="gutter">5</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="vars">$_</span><span>[0]=~s/(\d+)$/bar</span><span class="vars">$1</span><span>/;&nbsp;</span></td></tr><tr><td class="gutter">6</td><td class="line2">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">my $test_value="foo1";
+add_a_bar($test_value);
+print "$test_value\n";    # foobar1
+sub add_a_bar {
+   $_[0]=~s/(\d+)$/bar$1/;
+}
+</textarea></div>
+</span>
+<p>Note, however, that  only the individual <em>elements</em> of the <code>@_</code>
+array that are treated in this manner. Assigning values directly to the <code>@_</code>
+array will not only <em>not</em> change the passed in values, but it will also remove
+your ability to refer to the passed in values themselves.</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>my&nbsp;@oz=(</span><span class="string">"lions"</span><span>,</span><span class="string">"tigers"</span><span>,</span><span class="string">"bears"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">new_oz(@oz);&nbsp;</td></tr><tr><td class="gutter">3</td><td class="line1"><span class="keyword">print</span><span>&nbsp;join(</span><span class="string">",&nbsp;"</span><span>,@oz);&nbsp;&nbsp;&nbsp;#&nbsp;lions,&nbsp;tigers,&nbsp;bears&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">sub&nbsp;new_oz&nbsp;{&nbsp;</td></tr><tr><td class="gutter">5</td><td class="line1">&nbsp;&nbsp;&nbsp;@_=(<span class="string">"giraffes"</span><span>,</span><span class="string">"hippos"</span><span>,</span><span class="string">"kangaroos"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">6</td><td class="line2">&nbsp;&nbsp;&nbsp;<span class="vars">$_</span><span>[0]=</span><span class="string">"snakes"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">7</td><td class="line1">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">my @oz=("lions","tigers","bears");
+new_oz(@oz);
+print join(", ",@oz);   # lions, tigers, bears
+sub new_oz {
+   @_=("giraffes","hippos","kangaroos");
+   $_[0]="snakes";
+}
+</textarea></div>
+</span>
+<p>In the above example, you may have expected the print statement to print
+<code>giraffes, hippos, kangaroos</code> (or perhaps
+<code>snakes, hippos, kangaroos</code>) but in fact it's the original, unchanged
+array that is printed, since the assignment in the <code>new_oz</code> subroutine:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="line1"><span>@_=(</span><span class="string">"giraffes"</span><span>,</span><span class="string">"hippos"</span><span>,</span><span class="string">"kangaroos"</span><span>);&nbsp;</span></td></tr></tbody></table></div><textarea style="display: none;" name="code" class="php:nogutter:nocontrols" cols="60" rows="10">@_=("giraffes","hippos","kangaroos");
+</textarea></div>
+</span>
+<p>has no effect on the values that were "passed into" the subroutine.</p>
+<p>The second way to pass a variable into a subroutine such that it can be
+changed within the subroutine is to pass it by reference; that is, instead
+of passing the scalar values of the variable(s) we instead pass a reference
+to the variable itself:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>my&nbsp;@oz=(</span><span class="string">"lions"</span><span>,</span><span class="string">"tigers"</span><span>,</span><span class="string">"bears"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">#&nbsp;pass&nbsp;the&nbsp;oz&nbsp;<span class="keyword">array</span><span>&nbsp;</span><span class="keyword">as</span><span>&nbsp;a&nbsp;reference&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">new_oz(\@oz);&nbsp;</td></tr><tr><td class="gutter">4</td><td class="line2"><span class="keyword">print</span><span>&nbsp;join(</span><span class="string">",&nbsp;"</span><span>,@oz);&nbsp;&nbsp;&nbsp;#&nbsp;snakes,&nbsp;hippos,&nbsp;kangaroos&nbsp;</span></td></tr><tr><td class="gutter">5</td><td class="line1">sub&nbsp;new_oz&nbsp;{&nbsp;</td></tr><tr><td class="gutter">6</td><td class="line2">&nbsp;&nbsp;&nbsp;my&nbsp;<span class="vars">$new_array</span><span>=shift;&nbsp;</span></td></tr><tr><td class="gutter">7</td><td class="line1">&nbsp;&nbsp;&nbsp;@<span class="vars">$new_array</span><span>=(</span><span class="string">"snakes"</span><span>,</span><span class="string">"hippos"</span><span>,</span><span class="string">"kangaroos"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">8</td><td class="line2">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">my @oz=("lions","tigers","bears");
+# pass the oz array as a reference
+new_oz(\@oz);
+print join(", ",@oz);   # snakes, hippos, kangaroos
+sub new_oz {
+   my $new_array=shift;
+   @$new_array=("snakes","hippos","kangaroos");
+}
+</textarea></div>
+</span>
+<p>Again, in computer programming parlance, this is known as
+<em>pass-by-reference</em>. If this use of references confuses you
+or is new to you, you may wish to check out our earlier tutorial on
+<a href="http://www.webreference.com/programming/perl/nested">nested data structures</a> in
+Perl.</p>
+<p>Note that in either of the above usages, you can only change from
+within the subroutine something that was actually changeable in the
+main program, i.e., if you pass a literal value to the subroutine
+and try to change it directly, you'll get an error:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>add_a_bar(</span><span class="string">"foo1"</span><span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;ERROR!&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">sub&nbsp;add_a_bar&nbsp;{&nbsp;</td></tr><tr><td class="gutter">3</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="vars">$_</span><span>[0]=~s/(\d+)$/bar</span><span class="vars">$1</span><span>/;&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">add_a_bar("foo1");     # ERROR!
+sub add_a_bar {
+   $_[0]=~s/(\d+)$/bar$1/;
+}
+</textarea></div>
+</span>
+<p>We noted earlier that all parameters passed to and from Perl
+subroutines are passed as a simple list of scalar values. This means
+that when you pass an array or a hash to the subroutine, it's not
+the named array or hash that is passed to the subroutine, but instead all
+of the individual values are sent to the subroutine in a long list, i.e.:</p>
+<span name="KonaFilter">
+<div>
+<div class="dp-highlighter"><table class="dp-c" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="tools-corner"></td></tr><tr><td class="gutter">1</td><td class="line1"><span>my&nbsp;@oz=(</span><span class="string">"lions"</span><span>,</span><span class="string">"tigers"</span><span>,</span><span class="string">"bears"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">2</td><td class="line2">my&nbsp;%characters=(<span class="string">"main"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;</span><span class="string">"Dorothy"</span><span>,&nbsp;</span></td></tr><tr><td class="gutter">3</td><td class="line1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"supporting"</span><span>&nbsp;=&gt;&nbsp;</span><span class="string">"Toto"</span><span>);&nbsp;</span></td></tr><tr><td class="gutter">4</td><td class="line2">raw_dump(@oz,%characters);&nbsp;</td></tr><tr><td class="gutter">5</td><td class="line1">#&nbsp;prints:&nbsp;</td></tr><tr><td class="gutter">6</td><td class="line2">#&nbsp;Passed&nbsp;data&nbsp;values&nbsp;are:&nbsp;</td></tr><tr><td class="gutter">7</td><td class="line1">#&nbsp;&nbsp;&nbsp;lions&nbsp;</td></tr><tr><td class="gutter">8</td><td class="line2">#&nbsp;&nbsp;&nbsp;tigers&nbsp;</td></tr><tr><td class="gutter">9</td><td class="line1">#&nbsp;&nbsp;&nbsp;bears&nbsp;</td></tr><tr><td class="gutter">10</td><td class="line2">#&nbsp;&nbsp;&nbsp;supporting&nbsp;</td></tr><tr><td class="gutter">11</td><td class="line1">#&nbsp;&nbsp;&nbsp;Toto&nbsp;</td></tr><tr><td class="gutter">12</td><td class="line2">#&nbsp;&nbsp;&nbsp;main&nbsp;</td></tr><tr><td class="gutter">13</td><td class="line1">#&nbsp;&nbsp;&nbsp;Dorothy&nbsp;</td></tr><tr><td class="gutter">14</td><td class="line2">sub&nbsp;raw_dump&nbsp;{&nbsp;</td></tr><tr><td class="gutter">15</td><td class="line1">&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">"Passed&nbsp;data&nbsp;values&nbsp;are:&nbsp;\n"</span><span>;&nbsp;</span></td></tr><tr><td class="gutter">16</td><td class="line2">&nbsp;&nbsp;&nbsp;<span class="keyword">foreach</span><span>&nbsp;(@_)&nbsp;{&nbsp;</span><span class="keyword">print</span><span>&nbsp;</span><span class="string">"\t$_\n"</span><span>;&nbsp;}&nbsp;</span></td></tr><tr><td class="gutter">17</td><td class="line1">}&nbsp;</td></tr></tbody><thead><tr><td class="tools-corner"></td><td class="tools"><a href="#" onclick="dp.sh.Utils.ViewSource(this); return false;">view plain</a> | <a href="#" onclick="dp.sh.Utils.PrintSource(this); return false;">print</a> | <a href="#" onclick="dp.sh.Utils.About(this); return false;">?</a></td></tr></thead></table></div><textarea style="display: none;" name="code" class="php" cols="60" rows="10">my @oz=("lions","tigers","bears");
+my %characters=("main"       =&gt; "Dorothy",
+                "supporting" =&gt; "Toto");
+raw_dump(@oz,%characters);
+# prints:
+# Passed data values are:
+# 	lions
+#	tigers
+#	bears
+#	supporting
+#	Toto
+#	main
+#	Dorothy
+sub raw_dump {
+   print "Passed data values are: \n";
+   foreach (@_) { print "\t$_\n"; }
+}
+</textarea></div>
+</span>
+<p>As you can imagine, this can be very inefficient if your hashes/arrays
+are large (or the subroutine is called often). Passing such parameters by
+reference as in the earlier example is  more efficient.</p>
+<p>We can now define subroutines and pass to them unique values to be
+operated on. But how do we return unique values to the calling program,
+i.e., such as we might with a mathematical function?</p>
+<div style="float: right; margin-top: -15px;">
+<script type="text/javascript"><!--
+  insertButtons();
+//--></script><p align="right"><img alt="#" src="PerlSub_index_files/button_center.gif" border="0" height="18" width="18"><a href="http://www.webreference.com/programming/perl/subroutines/2.html"><img alt="&gt;" src="PerlSub_index_files/button_right.gif" border="0" height="18" width="18"></a><br><a href="http://www.webreference.com/programming/perl/subroutines/2.html">[next]</a>
+</p></div>
+
+  
+</div></div>
+                
+                </div>
+            <div id="right">
+<div class="image square quad">
+    <!--
+AD position = C
+OAS eqv. = 336x280
+QUAD pos = Bob-FLEX(BOB)POS(TOP)
+QUAD path = www.webreference.com
+Page type = index
+-->
+<script type="text/javascript" language="JavaScript">
+zzfocrender("203", "9530", "657017/657013/657012/581231/581034", "9", "300", "250", "", "", "");</script><script language="JavaScript" src="PerlSub_index_files/i0_002.js"></script><script language="JavaScript" src="PerlSub_index_files/i.js"></script><a href="http://o1.qnsr.com//cgi/c?a=20123873;x=2304;c=203657017,203657017;i=0;n=203;s=9530;p=20830170;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;y=http://www.webreference.com/programming/perl/subroutines/index.html;;e=i;s=9530;g=134;w=0;m=0;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;z=53004424;;k=http://solutions.internet.com/5146_cloud?" target="_blank" onmouseover="window.status=''; return true;" onmouseout="window.status=''; return true;"><img src="PerlSub_index_files/rs_ebook_cloud_bob1.jpg" alt="Click Here!" border="0"></a>
+<noscript>
+<a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;n=203;c=657017/657013/657012/581231/581034;s=9530;x=2304;f=6475070855;u=j;z=20111216011924" target="_blank">
+<img border="0" width="300" height="250" src="http://o1.qnsr.com/cgi/x?;n=203;c=657017/657013/657012/581231/581034;s=9530;x=2304;f=6475070855;u=j;z=20111216011924" alt="Click here" /></a>
+</noscript>
+</div>
+<div id="featured_tech_jobs">
+</div><div class="image square quad">
+    <!--
+AD position = M
+OAS eqv. = flex
+QUAD pos = Bob-FLEX(BOB)POS(MIDDLE)
+QUAD path = www.webreference.com
+Page type = index
+-->
+<script type="text/javascript" language="JavaScript">
+zzfocrender("203", "9530", "657021/657013/657012/581231/581034", "9", "300", "250", "", "", "");</script><script language="JavaScript" src="PerlSub_index_files/i0.js"></script><script language="JavaScript" src="PerlSub_index_files/i_002.js"></script><a href="http://o1.qnsr.com//cgi/c?a=20119757;x=2304;c=203657021,203657021;i=0;n=203;s=9530;p=20830170;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;y=http://www.webreference.com/programming/perl/subroutines/index.html;;e=i;s=9530;g=134;w=0;m=0;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;z=706749920;;k=http://solutions.internet.com/3851_betterpm-ssoban" target="_top" onmouseover="window.status=''; return true;" onmouseout="window.status=''; return true;"><img src="PerlSub_index_files/ebook_PM_300x250_C.jpg" alt="Click Here!" border="0"></a>
+<noscript>
+<a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;n=203;c=657021/657013/657012/581231/581034;s=9530;x=2304;f=1663534260;u=j;z=20111216011931" target="_blank">
+<img border="0" width="300" height="250" src="http://o1.qnsr.com/cgi/x?;n=203;c=657021/657013/657012/581231/581034;s=9530;x=2304;f=1663534260;u=j;z=20111216011931" alt="Click here" /></a>
+</noscript>
+</div>
+<div id="ssn_widget_container">
+    <div id="ssn_widget_header">
+        <h5><img alt="Justtechjobs.com" src="PerlSub_index_files/webreference.gif" align="absbottom" border="0">Find a programming school near you</h5>
+    </div>
+    <div id="ssn_widget_content">
+<form id="SSN" name="populate" action="/school-search-results.html" method="get">
+	 
+	 <label>Zip Code:</label>
+	  <input name="pc" maxlength="5" style="display: block; float: left;" type="text">
+	 <br><br> 
+	 <label>Subject:</label>
+	  <select name="sub">
+		<option value="all">- Select All Subjects -</option>
+				<optgroup label="Computers and Technology">
+		<option value="compapplications">Computer Applications</option>
+		<option value="comeng">Computer Engineering</option>
+		<option value="comscience">Computer Science</option>
+		<option value="cnp" selected="selected">Computer Prog. - Software Dev.</option>
+		<option value="gameprogramming">Computer Game Programming</option>
+		<option value="webdesign">Web Design</option>
+		<option value="webdevelopment">Web Development</option>
+		<option value="internetsystems">Internet Systems</option>
+        <option value="internetcertification">Internet Certification</option>
+        <option value="databasedesign">Database Design and Development</option>
+        <option value="infosystemsmgmt">Information Systems Management</option>
+        <option value="itprojectmgmt">Information Technology Project Management</option>
+		<option value="networkdesign">Network Design - Development</option>
+        <option value="systemsanalyst">Systems Analyst</option>
+	  </optgroup></select>
+	  <br><br>  
+	  <label>Degree:</label>
+	  <select name="qual">
+	   <option value="all" selected="selected">- Select All Degrees -</option>
+		<option value="associate">Associate's</option>
+		<option value="bachelor">Bachelor's</option>
+		<option value="master">Master's</option>
+		<option value="doctoral">Doctoral</option>
+		<option value="certificate">Certificates</option>
+		<option value="diploma">Diplomas</option>
+		<option value="coursework">Coursework</option>
+		<option value="mba">MBA</option>
+	  </select>
+	<br style="clear:both;"><br>  
+	 <input name="ct" value="online" type="radio">Online
+	  <input name="ct" value="campus" type="radio">Campus
+	  <input name="ct" value="either" checked="checked" type="radio">Both
+      
+	  <br><br> 
+	  <input value="Submit" type="submit">	
+</form></div>
+</div><div id="marketplace">
+    <script type="text/javascript" src="PerlSub_index_files/jsct.js"></script><a href="http://shlinks.industrybrains.com/sh?sid=843&amp;a=9b49615cc2753949f56b1c2d94f18671bc057b5f7d39901b3025859617bc91d8"></a><table style="width: 334px; height: 278px; border: 1px solid rgb(229, 229, 229); border-collapse: collapse; margin-bottom: 0px;" xmlns:ibn="urn:industrybrains.com:linkserver" cellspacing="0"><tbody><tr><td style="font: bold 13px Arial,Helvetica,sans-serif; color: rgb(255, 255, 255); text-align: left; padding: 2px 2px 2px 8px; background-color: rgb(0, 102, 164);" colspan="3">       MARKETPLACE</td></tr><tr><td style="padding-left: 3px; padding-right: 3px;"><a target="_blank" name="iblink" href="http://links.industrybrains.com/click?sid=829&amp;scid=12358&amp;rqctid=5812&amp;pos=1&amp;lid=659699&amp;cid=149169&amp;pr=2&amp;tstamp=20111216064839&amp;iip=121.54.32.149&amp;ltype=JSCR&amp;lname=7&amp;url=http://iq.govwin.com/corp/response/win_gov_business-m.cfm%3fcmp%3dOTC-ibftnet042910"><img src="PerlSub_index_files/94.png" alt="Image Ad" border="0" height="70" width="70"></a></td><td style="text-align: left ! important; padding: 3px; border: 0px solid rgb(24, 77, 49);"><a target="_blank" style="font: bold 11px Verdana,Arial,Helvetica,sans-serif; color: rgb(0, 102, 164); text-decoration: underline;" href="http://links.industrybrains.com/click?sid=829&amp;scid=12358&amp;rqctid=5812&amp;pos=1&amp;lid=659699&amp;cid=149169&amp;pr=2&amp;tstamp=20111216064839&amp;iip=121.54.32.149&amp;ltype=JSCR&amp;lname=7&amp;url=http://iq.govwin.com/corp/response/win_gov_business-m.cfm%3fcmp%3dOTC-ibftnet042910">Find and Win Government Contracts</a><div></div><a target="_blank" style="text-decoration: none; font: 10px Verdana; color: rgb(0, 0, 0);" href="http://links.industrybrains.com/click?sid=829&amp;scid=12358&amp;rqctid=5812&amp;pos=1&amp;lid=659699&amp;cid=149169&amp;pr=2&amp;tstamp=20111216064839&amp;iip=121.54.32.149&amp;ltype=JSCR&amp;lname=7&amp;url=http://iq.govwin.com/corp/response/win_gov_business-m.cfm%3fcmp%3dOTC-ibftnet042910">See Why Over 36,000 Users Use GovWin To Win Government Business. Free Trial!</a><div></div><a target="_blank" style="text-decoration: underline; font: 10px Verdana; color: rgb(90, 170, 38);" href="http://links.industrybrains.com/click?sid=829&amp;scid=12358&amp;rqctid=5812&amp;pos=1&amp;lid=659699&amp;cid=149169&amp;pr=2&amp;tstamp=20111216064839&amp;iip=121.54.32.149&amp;ltype=JSCR&amp;lname=7&amp;url=http://iq.govwin.com/corp/response/win_gov_business-m.cfm%3fcmp%3dOTC-ibftnet042910">www.GovWin.com</a></td></tr><script type="text/javascript" src="PerlSub_index_files/jsct_002.js"></script><script type="text/javascript" xmlns:ibn="urn:industrybrains.com:linkserver">            /* creative ids to request pixel for */          /*1.3.2010 EGB: Added UM-MS Exchange */            var ib_creative_ids = [151225];    /*1.4.2010 EGB: Commented out due to current db issues */  /*,152116,152117];*/            /* function for url parsing */          var ib_parseurl = function (url) {              var a =  document.createElement('a');              a.href = url;              return {                  source: url,                  protocol: a.protocol.replace(':',''),                  host: a.hostname,                  port: a.port,                  query: a.search,                  params: (function(){                      var ret = {},                          seg = a.search.replace(/^\?/,'').split('&'),                          len = seg.length, i = 0, s;                      for (;i<len;i++) {                          if (!seg[i]) { continue; }                          s = seg[i].split('=');                          ret[s[0]] = s[1];                      }                      return ret;                  })(),                  file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],                  hash: a.hash.replace('#',''),                  path: a.pathname.replace(/^([^\/])/,'/$1'),                  relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],                  segments: a.pathname.replace(/^\//,'').split('/')              };          };            /* function for building the template url */          var ib_request_impression = function (uid, vchannel, cid) {              var uid_token = '[UID]';              var cid_token = '[CID]';              var vchannel_token = '[VCH]';                            var impression_url = 'http://event.adxpose.com/event.flow?uid=[UID]&eventcode=000_000_12&location=&wh=&xy=&vchannel=[VCH]&cid=[CID]&duration=0&iframed=0&referer=&p=1';              impression_url = impression_url.replace(cid_token, cid);              impression_url = impression_url.replace(uid_token, uid);              impression_url = impression_url.replace(vchannel_token, vchannel);              document.write('<img src="' + impression_url + '" border="0" width="1" height="1" />');          };              /* create associative array from creative ids for quick lookup */          var ib_creative_ids_hash = [];          for (var i = 0; i < ib_creative_ids.length; i++) {               ib_creative_ids_hash[ib_creative_ids[i]] = 1;          }            /* keep track of which creatives we've seen already to safe guard against duplicate impressions */          var ib_seen_creatives = [];            /* loop through each url and check if we should request the impression url or not */          var ib_links = document.getElementsByName('iblink');          for (var i = 0; i < ib_links.length; i++) {              var url = ib_parseurl(ib_links[i].href);              var cid = url.params['cid'];              if (ib_creative_ids_hash[cid] && !ib_seen_creatives[cid]) {                    ib_seen_creatives[cid] = 1;                                    ib_request_impression(                                            /* UID is the adXpose marchex id + creative id */                      'VJdObwjoojIh2szV_' + cid,                                         /* VCHANNEL is our site id */                      url.params['sid'],                        /* CID is the adXpose campaign id, (Marchex_Springboard in prod) */                      /*'Marchex-Test' */                      'Marchex_Springboard'                  );              }          }        </script></tbody></table><a href="http://shlinks.industrybrains.com/sh?sid=829&amp;a=9b49615cc2753949f56b1c2d94f18671d589bb422f3d22fed0a717c762502234"></a>
+</div></div>
+
+            </div>
+        <div class="clear"></div>
+        <div id="footer">
+        <div id="footer_content">
+    <div id="quad_bottom" class="quad">
+        <!--
+AD position = I
+OAS eqv. = 468x60-2
+QUAD pos = Leo-FLEX(LEO)POS(BOTTOM)
+QUAD path = www.webreference.com
+Page type = index
+-->
+<script type="text/javascript" language="JavaScript">
+zzfocrender("203", "9530", "657019/657013/657012/581231/581034", "14", "728", "90", "", "", "");</script><script language="JavaScript" src="PerlSub_index_files/i0_004.js"></script><script language="JavaScript" src="PerlSub_index_files/i_003.js"></script><a href="http://o1.qnsr.com//cgi/c?a=20118384;x=3584;c=203657019,203657019;i=0;n=203;s=9530;p=20830170;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;y=http://www.webreference.com/programming/perl/subroutines/index.html;;e=i;s=9530;g=134;w=0;m=0;WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;z=320508366;;k=http://solutions.internet.com/3851_socialnet-ssoban" target="_top" onmouseover="window.status=''; return true;" onmouseout="window.status=''; return true;"><img src="PerlSub_index_files/ebook_SN_728x90_A.gif" alt="Click Here!" border="0"></a>
+<noscript>
+<a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=KQ3a0wrIZz0AAE9uIvUAAAAK;;;n=203;c=657019/657013/657012/581231/581034;s=9530;x=3584;f=5337832165;u=j;z=20111216011931" target="_blank">
+<img border="0" width="728" height="90" src="http://o1.qnsr.com/cgi/x?;n=203;c=657019/657013/657012/581231/581034;s=9530;x=3584;f=5337832165;u=j;z=20111216011931" alt="Click here" /></a>
+</noscript>
+    </div>
+    <div class="footer_listing">
+        &nbsp;
+    </div>
+    <div class="footer_listing">
+        <span class="list-header">WebReference</span>
+        <ul>
+            <li class="first"><a href="http://www.webreference.com/js/tips">Tip Archive</a></li>
+            <li><a href="http://www.webreference.com/about.html">About</a></li>
+            <li><a href="http://www.webreference.com/sitemap.html">Sitemap</a></li>
+            <li><a href="http://www.webreference.com/contactUs.php">Contact</a></li>
+            <li><a href="http://webreference.justtechjobs.com/">Jobs</a></li>
+            <li><a href="http://member.internet.com/login">Subscribe</a></li>
+        </ul>
+
+    </div>
+    <div class="footer_listing">
+        <span class="list-header">Topics</span>
+        <ul>
+            <li class="first"><a href="http://www.webreference.com/authoring">Web Authoring</a></li>
+            <li><a href="http://www.webreference.com/internet">The Internet and the Web</a></li>
+            <li><a href="http://www.webreference.com/multimedia">Multimedia</a></li>
+            <li><a href="http://www.webreference.com/programming">Web Programming</a></li>
+            <li><a href="http://www.webreference.com/promotion">Website Promotion and Marketing</a></li>
+            <li><a href="http://www.webreference.com/experts">Contributors</a></li>
+        </ul>
+    </div>
+    <div class="footer_listing">
+        <span class="list-header"><a href="http://www.developer.com/"><img src="PerlSub_index_files/dev.png" alt="Developer.com"></a></span>
+        <ul>
+            <li class="first"><a href="http://www.internet.com/Internetcom/Door/41187">Legal Notices</a></li>
+            <li><a href="http://www.internet.com/Internetcom/Door/41189#Licensing1">Licensing</a></li>
+            <li><a href="http://www.internet.com/Internetcom/Door/41189#Permissions">Permissions</a></li>
+            <li><a href="http://www.internet.com/Internetcom/Door/41186">Privacy Policy</a></li>
+            <li><a href="http://www.internet.com/mediakit/">Advertising</a></li>
+            <li><a href="http://e-newsletters.internet.com/">Newsletters</a></li>
+            <li><a href="http://e-newsletters.internet.com/announcement_list.html">E-mail Offers</a></li>
+        </ul>
+    </div>
+    <div class="footer_listing">
+        &nbsp;
+    </div>
+    <div class="clear"></div>
+    <div id="copyright">
+        Copyright © 2011 QuinStreet Inc. All Rights Reserved.
+    </div>
+</div>
+        </div>
+
+<!-- Google Analytics -->
+<script src="PerlSub_index_files/ga.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+<!--     hide from no js browsers
+delete Array.prototype.itemValidation;
+delete Array.prototype.isArray;
+var superTracker = _gat._getTracker("UA-2838492-1");
+superTracker._initData();
+superTracker._trackPageview();
+
+-->
+</script>
+<script type="text/javascript">
+   var site_name =  location.hostname;
+   if ( site_name.indexOf("www.") != 0 ) {
+     site_name  = "www."+site_name ;
+   }
+   document.write("<SCR" + "IPT LANGUAGE='JavaScript1.2' SRC='/icom_includes/footers/sites/"+ site_name +".js' TYPE='text/javascript'><\/SCR" + "IPT>");
+-->
+</script><script language="JavaScript1.2" src="PerlSub_index_files/www.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--     hide from no js browsers
+   pageTracker._initData();
+   pageTracker._trackPageview();
+   // -->
+</script>
+<!-- End Google Analytics -->
+
+        <!-- START VIBRANT --><!-- start Vibrant Media IntelliTXT script section -->
+        <script type="text/javascript" src="PerlSub_index_files/front.js"></script>
+        <!-- end Vibrant Media IntelliTXT script section -->
+        <!-- END VIBRANT -->
+
+		<!-- CREATE AJAX CONTAINERS -->
+		<div id="ajax_alpha"></div>
+		<div id="ajax_beta"></div>
+
+        <script language="javascript" src="PerlSub_index_files/shCore.js"></script>
+        <script language="javascript" src="PerlSub_index_files/shBrushPhp.js"></script>
+
+        <script language="javascript" src="PerlSub_index_files/shBrushXml.js"></script>
+        <script language="javascript" src="PerlSub_index_files/shBrushJScript.js"></script>
+        <script language="javascript">
+            dp.SyntaxHighlighter.HighlightAll('code');
+        </script>
+        <!-- FOR LIKE BUTTON -->
+        <script src="PerlSub_index_files/all.js" type="text/javascript"></script>
+        <div id="fb-root"></div>
+	
+    <script language="JavaScript" type="text/javascript">
+	var gDomain="www.qsstats.com";
+	var gDcsId="dcs17vxkl10000wkxczu5l0wa_9y2e";
+	var gFpc="WT_FPC";
+	var gConvert=true;
+	var gFpcDom = "webreference.com";
+	if ((typeof(gConvert) != "undefined") && gConvert && (document.cookie.indexOf(gFpc + "=") == -1) && (document.cookie.indexOf("WTLOPTOUT=")==-1)) {
+	    document.write("<SCR"+"IPT TYPE='text/javascript' SRC='http"+(window.location.protocol.indexOf('https:')==0?'s':'')+"://"+gDomain+"/"+gDcsId+"/wtid.js"+"'><\/SCR"+"IPT>");
+	}
+	function dcsAdditionalParameters() {}
+    </script><script type="text/javascript" src="PerlSub_index_files/wtid.js"></script>
+
+    <script type="text/javascript" src="PerlSub_index_files/webtrends.js"></script>
+
+    <noscript><img alt="" border="0" name="DCSIMG" width="1" height="1" src="http://www.qsstats.com/dcs17vxkl10000wkxczu5l0wa_9y2e/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=8.0.2" /></noscript>
+
+<script src="PerlSub_index_files/jquery-ui.js"></script><script src="PerlSub_index_files/a_002.js"></script></body></html>

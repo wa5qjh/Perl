@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+use Tk ;
+
+
+my $mw = MainWindow->new;
+$mw->title("Good Day");
+$mw->Label(-text => " This window looks more organized" ) ->pack ;
+
+MainLoop;
