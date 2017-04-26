@@ -1,4 +1,6 @@
-RonsRobots
+# .gitignore
+#04/26/17 09:58 am
+RonsRobots/
 pearlcheat*
 *.cmd
-PerlTutorials
+PerlTutorials/
