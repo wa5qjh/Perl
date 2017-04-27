@@ -1,14 +1,26 @@
-### Using git and githob
+# Gary Corell
+#04/27/17 10:15:00
+### Using git and github
+## set up remotes
+git push --set-upstream https://github.com/wa5qjh/Perl.git master
+git push --set-upstream https://github.com/wa5qjh/Python.git master
+git push --set-upstream https://github.com/wa5qjh/CStuff.git master
+git remote -v
+####
+git add  <filename> <filename>.....
+git commit    # and edit
+git push https://github.com/wa5qjh/Perl master    #for https will need  the username and password
+or git push perl master
+######
+
+
+###  
 1.  cd to  project folder
 2. git init   # create a git dir 
 3. git add  starts the tracking of a file you're working on
 4.  finish the particularl file
 5. git commit adds the file to the repo
-<<<<<<< HEAD
-__
-=======
 
->>>>>>> 479c6ee2a807f8b0aafdbe86c0b1bf163b1618c4
 6. create a certificate to use with github
 7. store the cert in  the proper location.
 8. give github a copy of the cert
@@ -28,6 +40,9 @@ git push -u origin master
  
  OR import code from another repo
  
+### git check status of a remote
+git remote show {origin|python| ...}
+ 
 ### clone something remote
 git clone https/github.com/wa5qjh/something
 git clone https://github.com/jentron/RonsRobots
@@ -40,6 +55,11 @@ git clone https://github.com/jentron/RonsRobots
 
 ### check urls
 git remote -v	## should yeild two url lines fetch & push
+### renameing remotes
+git remote rename pb paul
+$ git remote
+origin
+paul
 
 ### change to ssh 
 Change your remote's URL from HTTPS to SSH with the git remote set-url command.
@@ -61,7 +81,7 @@ git remote set-url origin https://github.com/USERNAME/OTHERREPOSITORY.git
 git remote -v
 origin  https://github.com/wa5qjh/Perl.git (fetch)
 origin  https://github.com/wa5qjh/Perl.git (push)
-
+   
 #pattern only:
 origin  https://github.com/USERNAME/OTHERREPOSITORY.git (fetch)
 origin  https://github.com/USERNAME/OTHERREPOSITORY.git (push)
