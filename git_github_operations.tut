@@ -4,7 +4,11 @@
 3. git add  starts the tracking of a file you're working on
 4.  finish the particularl file
 5. git commit adds the file to the repo
+<<<<<<< HEAD
 __
+=======
+
+>>>>>>> 479c6ee2a807f8b0aafdbe86c0b1bf163b1618c4
 6. create a certificate to use with github
 7. store the cert in  the proper location.
 8. give github a copy of the cert
