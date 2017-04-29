@@ -1,0 +1,7 @@
+Two files buried in.git that seem imposible to get rid of.
+the one labeled .pack is 31MB and is actually 
+ActivePerl-5.12.4.1205-MSWin32-x86-294981.msi*
+
+~/Perl/.git/objects/pack/pack-ccc387d83555e77766b3bd55b895ef9e3f92be3e.idx
+~/Perl/.git/objects/pack/pack-ccc387d83555e77766b3bd55b895ef9e3f92be3e.pack
+
