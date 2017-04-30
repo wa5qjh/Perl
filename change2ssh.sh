@@ -1,6 +1,7 @@
 #!/bin/sh
 # Gary Corell
 # 04/30/17  07:44 AM
+# 04/30/17  08:24 AM
 
 echo "Change to ssh mode for github"
 echo, "This will take a few minutes. We are setting up an ssh key on  github"

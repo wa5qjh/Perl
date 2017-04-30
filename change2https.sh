@@ -2,7 +2,9 @@
 # Gary Corell
 # 04/30/17  07:44 AM
 
-echo "Change to ssh mode for github"
+echo "Change to HTTPS  mode for github"
+echo "checking the current URL's. If we're already in https mode, this wont hurt""
+git remote -v
 #
 echo, "First we change the urls"
 git remote set-url origin https:github.com/wa5qjh/Perl.git
