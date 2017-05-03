@@ -7,3 +7,4 @@ My Perl folder. old Pperl5 and perlTk
 
 I have added shell scripts to change to ssh  mode and back  to HTTPS mode
 
+added ios app "gitgo" to ipad which allows me to edit programs there but not to test them.
